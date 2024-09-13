@@ -1,0 +1,130 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Task API",
+      "description": "API para la gestión de tareas usando MongoDB y gRPC",
+      "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "schemes": ["http"],
+    "tags": [
+      {
+        "name": "Tareas",
+        "description": "Operaciones relacionadas con las tareas"
+      }
+    ],
+    "paths": {
+      "/crearTarea": {
+        "post": {
+          "tags": ["Tareas"],
+          "summary": "Crea una nueva tarea",
+          "description": "Permite crear una nueva tarea en la base de datos",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Datos de la nueva tarea",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string",
+                    "example": "Desarrollo de Tarea"
+                  },
+                  "descripcion": {
+                    "type": "string",
+                    "example": "Descripción de la tarea"
+                  },
+                  "terminado": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Tarea creada con éxito"
+            },
+            "500": {
+              "description": "Error del servidor"
+            }
+          }
+        }
+      },
+      "/tareas/{id}": {
+        "put": {
+          "tags": ["Tareas"],
+          "summary": "Actualiza una tarea por su ID",
+          "description": "Actualiza una tarea existente en la base de datos",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string",
+              "description": "ID de la tarea a actualizar",
+              "example": "612c43cfc9b6f915f0e7d90e"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Datos actualizados de la tarea",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string",
+                    "example": "Tarea actualizada"
+                  },
+                  "descripcion": {
+                    "type": "string",
+                    "example": "Nueva descripción de la tarea"
+                  },
+                  "terminado": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tarea actualizada con éxito"
+            },
+            "404": {
+              "description": "Tarea no encontrada"
+            },
+            "500": {
+              "description": "Error del servidor"
+            }
+          }
+        }
+      },
+      "/tareas": {
+        "get": {
+          "tags": ["Tareas"],
+          "summary": "Obtiene una lista de tareas",
+          "description": "Devuelve una lista de todas las tareas almacenadas",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Lista de tareas obtenida con éxito"
+            },
+            "500": {
+              "description": "Error del servidor"
+            }
+          }
+        }
+      }
+    }
+  }
+  

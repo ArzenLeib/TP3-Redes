@@ -1,29 +1,31 @@
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
-import path from 'path';
 
-const PROTO_PATH = path.join(process.cwd(), 'simple.proto');
+// Cargar el archivo proto
+const PROTO_PATH = './tasks.proto';
+const packageDefinition = protoLoader.loadSync(PROTO_PATH, {});
+const TaskService = grpc.loadPackageDefinition(packageDefinition).TaskService;
 
-// Cargar el archivo .proto
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
+const client = new TaskService('localhost:50051', grpc.credentials.createInsecure());
+
+// Llamar al método GetTaskStats
+client.GetTaskStats({}, (err, response) => {
+  if (err) throw err;
+  console.log("Estadísticas de tareas:");
+  console.log(`Total de tareas: ${response.totalTareas}`);
+  console.log(`Tareas completadas: ${response.tareasCompletadas}`);
 });
 
-const simpleProto = grpc.loadPackageDefinition(packageDefinition).SimpleService;
-
-// Creo un cliente gRPC
-const client = new simpleProto('localhost:50051', grpc.credentials.createInsecure());
-
-// Llammo  a la funcion que suma... los numeros aqui estan hardcodeados...
-client.Add({ number1: 14, number2: 16 }, (error, response) => {
-  if (!error) {
-    console.log('Resultado:', response.result);
-  } else {
-    console.error('Error:', error);
-  }
+// Llamar al método GetTasksByDate
+const date = '2024-09-08'; // Cambia esta fecha según sea necesario
+client.GetTasksByDate({ date }, (err, response) => {
+  if (err) throw err;
+  console.log("Tareas creadas en el día:");
+  response.tasks.forEach(task => {
+    console.log(`ID: ${task.id}`);
+    console.log(`Nombre: ${task.nombre}`);
+    console.log(`Descripción: ${task.descripcion}`);
+    console.log(`Terminado: ${task.terminado}`);
+    console.log('---');
+  });
 });
-

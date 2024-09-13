@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+service TaskService {
+  // Método para obtener el listado de tareas
+  rpc GetTasks (Empty) returns (TaskList);
+
+  // Método para obtener estadísticas de las tareas
+  rpc GetTaskStats (Empty) returns (TaskStats);
+
+  // Método para obtener tareas por fecha
+  rpc GetTasksByDate (DateRequest) returns (TaskByDateList);
+}
+
+message Empty {}
+
+message Task {
+  string id = 1;
+  string nombre = 2;
+  string descripcion = 3;
+  bool terminado = 4;
+}
+
+message TaskList {
+  repeated Task tasks = 1;
+}
+
+message TaskStats {
+  int32 totalTareas = 1;
+  int32 tareasCompletadas = 2;
+}
+
+message DateRequest {
+  string date = 1; // Fecha en formato 'YYYY-MM-DD'
+}
+
+message TaskByDateList {
+  repeated Task tasks = 1;
+}
