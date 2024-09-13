@@ -45,7 +45,7 @@ Para acceder a la documentación de la API-REST, sigue estos pasos:
 
 ### 3. `GetTasksByDate`
 
-   **Descripción:** Obtiene el listado de tareas para una fecha específica.
+   **Descripción:** Obtiene el listado de tareas hechas en la fecha específica.
 
    **Solicitud:**
    ```json
