@@ -25,4 +25,45 @@ Para acceder a la documentación de la API-REST, sigue estos pasos:
       "terminado": "boolean"
     }
   ]
-}
+} 
+```
+
+# 2. `GetTaskStats`
+
+   **Descripción:** Obtiene estadísticas de las tareas.
+
+   **Solicitud:** `Empty`
+
+   **Respuesta:**
+   ```json
+   {
+ 	"totalTareas": "int32",
+ 	"tareasCompletadas": "int32"
+   }
+   ```
+
+
+# 3. `GetTasksByDate`
+
+   **Descripción:** Obtiene el listado de tareas para una fecha específica.
+
+   **Solicitud:**
+   ```json
+   {
+ 	"date": "string" // Fecha en formato 'YYYY-MM-DD'
+   }
+   ```
+
+   **Respuesta:**
+   ```json
+   {
+ 	"tasks": [
+   	{
+     	"id": "string",
+     	"nombre": "string",
+     	"descripcion": "string",
+     	"terminado": "boolean"
+   	}
+ 	]
+   }
+   ```
