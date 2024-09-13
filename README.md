@@ -28,7 +28,7 @@ Para acceder a la documentación de la API-REST, sigue estos pasos:
 } 
 ```
 
-# 2. `GetTaskStats`
+### 2. `GetTaskStats`
 
    **Descripción:** Obtiene estadísticas de las tareas.
 
@@ -43,7 +43,7 @@ Para acceder a la documentación de la API-REST, sigue estos pasos:
    ```
 
 
-# 3. `GetTasksByDate`
+### 3. `GetTasksByDate`
 
    **Descripción:** Obtiene el listado de tareas para una fecha específica.
 
